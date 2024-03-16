@@ -1,8 +1,8 @@
 const withAuth = (Component) => {
   return function WithAuth(props) {
-    // const isLogin = true;
+    // const token = Cookies.get('user_token');;
 
-    // if (!isLogin) return <div>Anda harus login</div>
+    // if (!token) return <Component {...props} />
 
     return <Component {...props} />
   };

@@ -106,3 +106,18 @@ a {
     color-scheme: dark;
   }
 }
+
+.header {
+  width: 100%;
+  display: flex;
+  height: var(--chakra-sizes-full);
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--chakra-colors-gray-200);
+  padding: var(--chakra-space-4);
+  z-index: 3;
+}
+
+.chakra-toast__inner {
+  margin-top: 5rem !important;
+}

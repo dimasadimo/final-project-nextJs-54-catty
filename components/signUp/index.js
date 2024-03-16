@@ -1,4 +1,4 @@
-//import { useMutation } from "@/hooks/useMutation";
+import { useMutation } from "@/hooks/useMutation";
 import {
   Box,
   Flex,
@@ -12,45 +12,52 @@ import {
   InputLeftAddon,
   InputGroup,
   Text,
-  Link,
   useToast
 } from "@chakra-ui/react";
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
-import Cookies from "js-cookie";
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Link from "next/link";
 
 const SignUp = () => {
   const toast = useToast();
   const router = useRouter();
-  //const { mutate } = useMutation();
+  const { mutate } = useMutation();
   const [payload, setPayload] = useState({
+    name: '',
     email: '',
-    password: ''
+    dob: "",
+    phone: "",
+    hobby: "",
+    password: ""
   });
 
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
   const handleSubmit = async () => {
-    // const response = await mutate({ url: 'https://paace-f178cafcae7b.nevacloud.io/api/login', payload});
+    const response = await mutate({ url: 'https://paace-f178cafcae7b.nevacloud.io/api/register', payload});
   
-    // if(!response.success) { 
-    //   toast({
-    //     title: 'Login Failed',
-    //     description: 'Email and password is incorrect',
-    //     status: 'error',
-    //     duration: 2000,
-    //     isClosable: true,
-    //     position: 'top',
-    //   })
-    // } else {
-    //   Cookies.set("user_token", response.data.token, {
-    //     expires: new Date(response.data.expires_at),
-    //     path: '/'
-    //   });
-    //   router.push('/')
-    // }
+    if(!response?.success) { 
+      toast({
+        title: 'Register Failed',
+        description: `Error ${response?.status} ${response?.message}`,
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+        position: 'top',
+      })
+    } else {
+      router.push('/login');
+      toast({
+        title: 'Success!',
+        description: "Your account has been created",
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+        position: 'top',
+      })
+    }
   };
 
   return (
@@ -61,10 +68,10 @@ const SignUp = () => {
           <FormControl mt='2' isRequired>
             <FormLabel>Name</FormLabel>
             <Input 
-              value={payload.email} 
+              value={payload?.name} 
               placeholder="Name"
               onChange={(event) =>
-                setPayload({ ...payload, email: event.target.value })
+                setPayload({ ...payload, name: event.target.value })
               }
               isReaquired
             />
@@ -72,7 +79,7 @@ const SignUp = () => {
           <FormControl isRequired>
             <FormLabel>Email Address</FormLabel>
             <Input 
-              value={payload.email} 
+              value={payload?.email} 
               placeholder="Email"
               onChange={(event) =>
                 setPayload({ ...payload, email: event.target.value })
@@ -83,7 +90,7 @@ const SignUp = () => {
             <FormLabel>Password</FormLabel>
             <InputGroup size='lg'>
               <Input 
-                value={payload.password} 
+                value={payload?.password} 
                 placeholder="Password" 
                 type={show ? 'text' : 'password'}
                 onChange={(event) =>
@@ -100,12 +107,12 @@ const SignUp = () => {
           <FormControl >
             <FormLabel>Date of birth</FormLabel>
             <Input 
-              value={payload.email} 
+              value={payload?.dob} 
               placeholder="Select Date"
               size="md"
               type="date"            
               onChange={(event) =>
-                setPayload({ ...payload, email: event.target.value })
+                setPayload({ ...payload, dob: event.target.value })
               }
             />
           </FormControl>
@@ -116,18 +123,22 @@ const SignUp = () => {
               +62
             </InputLeftAddon>
             <Input 
+              value={payload?.phone} 
               type='tel' 
               placeholder='Phone number'
+              onChange={(event) =>
+                setPayload({ ...payload, phone: event.target.value })
+              }
             />
           </InputGroup>
           </FormControl>
           <FormControl>
             <FormLabel>Hobby</FormLabel>
             <Input 
-              value={payload.email} 
+              value={payload?.hobby} 
               placeholder="Hobby"
               onChange={(event) =>
-                setPayload({ ...payload, email: event.target.value })
+                setPayload({ ...payload, hobby: event.target.value })
               }
             />
           </FormControl>
@@ -138,7 +149,7 @@ const SignUp = () => {
             >Sign Up</Button>
           </FormControl>
           <Text fontSize='sm'>
-            Already have an account? <Link href="/login" color="black" textDecoration="underline">Sign in</Link>
+            Already have an account? <Link href="/login" ><span style={{ textDecoration: "underline" }}>Sign in</span></Link>
           </Text>
         </Stack>
       </Flex>

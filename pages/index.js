@@ -1,9 +1,12 @@
-import Layout from "@/layout";
+import Posts from "@/components/posts";
+import dynamic from "next/dynamic";
+
+const LayoutComponent = dynamic(() => import('@/layout'))
 
 export default function Home() {
   return (
-    <Layout metaTitle="Home" metaDescription="All contents belong to Home">
-      <p className="background-orange">Content</p>
-    </Layout>
+    <LayoutComponent metaTitle="Welcome to Catty" metaDescription="All contents belong to Catty">
+      <Posts />
+    </LayoutComponent>
   );
 }

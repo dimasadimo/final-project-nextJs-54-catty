@@ -1,4 +1,4 @@
-//import { useMutation } from "@/hooks/useMutation";
+import { useMutation } from "@/hooks/useMutation";
 import {
   Box,
   Flex,
@@ -11,18 +11,18 @@ import {
   InputRightElement,
   InputGroup,
   Text,
-  Link,
   useToast
 } from "@chakra-ui/react";
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Link from "next/link";
 
 const SignIn = () => {
   const toast = useToast();
   const router = useRouter();
-  //const { mutate } = useMutation();
+  const { mutate } = useMutation();
   const [payload, setPayload] = useState({
     email: '',
     password: ''
@@ -32,24 +32,31 @@ const SignIn = () => {
   const handleClick = () => setShow(!show);
 
   const handleSubmit = async () => {
-    // const response = await mutate({ url: 'https://paace-f178cafcae7b.nevacloud.io/api/login', payload});
+    const response = await mutate({ url: 'https://paace-f178cafcae7b.nevacloud.io/api/login', payload});
   
-    // if(!response.success) { 
-    //   toast({
-    //     title: 'Login Failed',
-    //     description: 'Email and password is incorrect',
-    //     status: 'error',
-    //     duration: 2000,
-    //     isClosable: true,
-    //     position: 'top',
-    //   })
-    // } else {
-    //   Cookies.set("user_token", response.data.token, {
-    //     expires: new Date(response.data.expires_at),
-    //     path: '/'
-    //   });
-    //   router.push('/')
-    // }
+    if(!response?.success) { 
+      toast({
+        title: 'Login Failed',
+        description: `Error ${response?.status} ${response?.message}`,
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+        position: 'top',
+      });
+    } else {
+      Cookies.set("user_token", response?.data?.token, {
+        expires: new Date(response?.data?.expires_at),
+        path: '/'
+      });
+      router.push('/');
+      toast({
+        title: 'Welcome to Catty!',
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+        position: 'top',
+      });
+    }
   };
 
   return (
@@ -57,10 +64,10 @@ const SignIn = () => {
       <Flex alignItems='center' justifyContent='center' height='100%'>
         <Stack direction='column'>
           <Heading size='lg' fontSize='28px' mb='4'>Sign in to Catty</Heading>
-          <FormControl mt='2' isInvalid={payload?.email === ''}>
+          <FormControl mt='2' >
             <FormLabel>Email Address</FormLabel>
             <Input 
-              value={payload.email} 
+              value={payload?.email} 
               placeholder="Email"
               onChange={(event) =>
                 setPayload({ ...payload, email: event.target.value })
@@ -71,7 +78,7 @@ const SignIn = () => {
             <FormLabel>Password</FormLabel>
             <InputGroup size='lg'>
               <Input 
-                value={payload.password} 
+                value={payload?.password} 
                 placeholder="Password" 
                 type={show ? 'text' : 'password'}
                 onChange={(event) =>
@@ -92,7 +99,7 @@ const SignIn = () => {
             >Sign In</Button>
           </FormControl>
           <Text fontSize='sm'>
-            Don't have an account? <Link href="/register" color="black" textDecoration="underline">Sign up</Link>
+            Don't have an account? <Link href="/register" ><span style={{ textDecoration: "underline" }}>Sign up</span></Link>
           </Text>
         </Stack>
       </Flex>
