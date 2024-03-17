@@ -123,7 +123,8 @@ const PostCard = ({ post, setShouldRefetch, shouldRefetch }) => {
                 </Heading>
                 <Text fontSize='md'>{post?.user?.email}</Text>
                 <Text fontSize='sm'>
-                  {post?.created_at === post?.updated_at ? moment(localCreateDate).fromNow() : moment(localUpdateDate).fromNow()}
+                  {post?.created_at === post?.updated_at ? moment(localCreateDate).fromNow() : 
+                    moment(localUpdateDate).fromNow()}
                   {post?.created_at !== post?.updated_at &&
                     <Text as='b' fontSize='xs' marginLeft="1" backgroundColor="#EDF2F7" p="1">EDITED</Text>
                   }

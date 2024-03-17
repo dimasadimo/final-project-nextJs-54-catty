@@ -96,15 +96,20 @@ const SignIn = () => {
             <Button mt='2' width="100%" backgroundColor="#329795" color="white" 
               onClick={() => handleSubmit()}
               _hover={{ backgroundColor: "#59C9C6" }}
-            >Sign In</Button>
+            >Sign In
+            </Button>
           </FormControl>
-          <Text fontSize='sm'>
-            Don't have an account? <Link href="/register" ><span style={{ textDecoration: "underline" }}>Sign up</span></Link>
+          <Text fontSize='sm'> Don't have an account? 
+            <Link href="/register" >
+              <span style={{ textDecoration: "underline" }} >
+                Sign up
+              </span>
+            </Link>
           </Text>
         </Stack>
       </Flex>
     </Box>
   )
-}
+};
 
 export default SignIn;
