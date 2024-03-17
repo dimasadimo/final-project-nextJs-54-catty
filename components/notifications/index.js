@@ -16,7 +16,7 @@ const Notifications = () => {
       Authorization: `Bearer ${token}`,
     }
   });
-  console.log(notifications, isLoading)
+  
   if(isLoading) return <p>Loading</p>
 
   return (
@@ -24,7 +24,7 @@ const Notifications = () => {
       <Flex>
         <Grid gap={3}>
         {notifications?.data?.map((item) => (
-          <NotificationCard id={item?.id} notification={item}/>
+          <NotificationCard key={item?.id} notification={item}/>
         ))}
         </Grid>
       </Flex>

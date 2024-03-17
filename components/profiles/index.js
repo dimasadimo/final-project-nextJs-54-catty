@@ -10,23 +10,53 @@ import {
   Textarea,
   Text,
   Avatar,
+  useToast,
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import PostCard from "../common/postCard";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "@/context/userContext";
+import { useMutation } from "@/hooks/useMutation";
 
 const Profiles = () => {
 
   const value = useContext(UserContext);
+  const toast = useToast();
+  const { mutate } = useMutation();
+  const [post, setPost] = useState({
+    description: "",
+  });
+  const [shouldRefetch, setShouldRefetch] = useState(false);
   const token = Cookies.get('user_token');
 
   const { data: posts, isLoading } = useQueries({ prefixUrl: "https://paace-f178cafcae7b.nevacloud.io/api/posts?type=me", 
     headers: {
       Authorization: `Bearer ${token}`,
-    }
+    },
+    dependencies: shouldRefetch,
   });
-  console.log(posts, isLoading)
+
+  const handleSubmit = async () => {
+    const response = await mutate({ url: 'https://paace-f178cafcae7b.nevacloud.io/api/post', payload: {...post}, 
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    });
+  
+    if(!response?.success) { 
+      toast({
+        title: 'Internal Server Error',
+        description: `Error ${response?.status} ${response?.message}`,
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+        position: 'top',
+      });
+    } else {
+      setShouldRefetch(!shouldRefetch);
+    }
+  };
+
   if(isLoading) return <p>Loading</p>
   return (
     <Box marginBottom="4">
@@ -71,15 +101,17 @@ const Profiles = () => {
       >
         <Card width={"27rem"}>
           <CardBody>
-          <Textarea
-          // onChange={(event) =>
-          //   setNotes({ ...notes, description: event.target.value })
-          // }
-          backgroundColor="gray.50"
-        />
-        <Button mt='2' width="100%" backgroundColor="#329795" color="white" 
-              //onClick={() => handleSubmit()}
+            <Textarea
+              onChange={(event) =>
+                setPost({ ...post, description: event.target.value })
+              }
+              value={post?.description}
+              backgroundColor="gray.50"
+            />
+            <Button mt='2' width="100%" backgroundColor="#329795" color="white" 
+              onClick={handleSubmit}
               _hover={{ backgroundColor: "#59C9C6" }}
+              isDisabled={!post?.description}
             >Post</Button>
           </CardBody>
         </Card>
@@ -88,7 +120,12 @@ const Profiles = () => {
       <Flex marginTop='25rem'>
         <Grid gap={5}>
         {posts?.data?.map((item) => (
-          <PostCard id={item?.id} post={item}/>
+          <PostCard 
+            key={item?.id} 
+            post={item}
+            setShouldRefetch={setShouldRefetch} 
+            shouldRefetch={shouldRefetch}
+          />
         ))}
         </Grid>
       </Flex>

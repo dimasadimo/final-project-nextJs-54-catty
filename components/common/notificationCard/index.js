@@ -2,14 +2,10 @@ import PropTypes from 'prop-types';
 import {
   GridItem,
   Card,
-  CardHeader,
   CardBody,
-  CardFooter,
   Flex,
   Text,
   Avatar,
-  Box,
-  Heading,
   Button,
 } from "@chakra-ui/react";
 import moment from 'moment/moment';

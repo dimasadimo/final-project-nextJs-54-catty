@@ -15,7 +15,7 @@ export default function Layout({ children, metaTitle, metaDescription }) {
         <Container bg='white' maxW='480px' width="var(--chakra-sizes-full)" mx="auto" p="0" centerContent>
           <Header />
           <Container
-            height='92vh'
+            height='91.5vh'
             overflowX="scroll" 
             overflowY="scroll"
           >
