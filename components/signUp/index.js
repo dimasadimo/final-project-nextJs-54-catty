@@ -149,7 +149,12 @@ const SignUp = () => {
             >Sign Up</Button>
           </FormControl>
           <Text fontSize='sm'>
-            Already have an account? <Link href="/login" ><span style={{ textDecoration: "underline" }}>Sign in</span></Link>
+            Already have an account? 
+            <Link href="/login" >
+              <span style={{ textDecoration: "underline" }}>
+                Sign in
+              </span>
+            </Link>
           </Text>
         </Stack>
       </Flex>
