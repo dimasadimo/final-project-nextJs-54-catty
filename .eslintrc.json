@@ -49,6 +49,9 @@
     "comma-dangle": ["off", "never"],
     "no-unused-vars": "off",
     "no-console": "off",
-    "react/no-unescaped-entities": "off"
+    "react/no-unescaped-entities": "off",
+    "react/jsx-indent": "off",
+    "react/jsx-indent-props": "off",
+    "react/jsx-closing-tag-location": "off"
   }
 }

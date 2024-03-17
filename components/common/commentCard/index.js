@@ -6,6 +6,7 @@ import {
   Text,
   Avatar,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import moment from 'moment/moment';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
@@ -15,6 +16,7 @@ import Cookies from "js-cookie";
 
 const CommentCard = ({ comment, shouldRefetch, setShouldRefetch }) => {
 
+  const toast = useToast();
   const { mutate } = useMutation();
   const token = Cookies.get('user_token');
   const localCreateDate = new Date(comment?.created_at);

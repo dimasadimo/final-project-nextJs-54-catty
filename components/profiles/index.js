@@ -171,7 +171,9 @@ const Profiles = ({ isDetail }) => {
                 loadingText='Posting'
                 colorScheme='#59C9C6'
                 variant='outline'
-              >Post</Button>
+              >
+                Post
+              </Button>
             </CardBody>
           </Card>
         </Flex>
