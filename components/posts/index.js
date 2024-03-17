@@ -8,6 +8,7 @@ import {
   Button,
   Textarea,
   useToast,
+  CircularProgress,
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import PostCard from "../common/postCard";
@@ -17,7 +18,7 @@ import { useState } from "react";
 const Posts = () => {
 
   const toast = useToast();
-  const { mutate } = useMutation();
+  const { mutate, isLoading: isLoadingPost } = useMutation();
   const [post, setPost] = useState({
     description: "",
   });
@@ -49,10 +50,13 @@ const Posts = () => {
       });
     } else {
       setShouldRefetch(!shouldRefetch);
+      setPost({
+        ...post,
+        description: "",
+      });
     }
   };
 
-  if(isLoading) return <p>Loading</p>
   return (
     <Box marginBottom="4">
       <Flex margin="0" 
@@ -73,21 +77,28 @@ const Posts = () => {
               onClick={handleSubmit}
               _hover={{ backgroundColor: "#59C9C6" }}
               isDisabled={!post?.description}
+              isLoading={isLoadingPost}
+              loadingText='Posting'
+              colorScheme='#59C9C6'
+              variant='outline'
             >Post</Button>
           </CardBody>
         </Card>
       </Flex>
-      <Flex marginTop='13rem'>
-        <Grid gap={5}>
-        {posts?.data?.map((item) => (
-          <PostCard 
-            key={item?.id} 
-            post={item} 
-            setShouldRefetch={setShouldRefetch} 
-            shouldRefetch={shouldRefetch}
-          />
-        ))}
-        </Grid>
+      <Flex marginTop='13rem' direction="column" alignItems="center">
+        {
+          isLoading ? <CircularProgress isIndeterminate color='#329795' /> :
+          <Grid gap={5}>
+            {posts?.data?.map((item) => (
+              <PostCard 
+                key={item?.id} 
+                post={item} 
+                setShouldRefetch={setShouldRefetch} 
+                shouldRefetch={shouldRefetch}
+              />
+            ))}
+            </Grid>
+        }
       </Flex>
     </Box>
   );

@@ -1,14 +1,19 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 export const useMutation = () => {
   const [data, setData] = useState({
   data: null,
-  isLoading: true,
+  isLoading: false,
   isError: false,
 }); 
 
 const mutate = useCallback(
   async ({ url = "", method = "POST", payload = {}, headers = {} } = {}) => {
+    setData({
+      ...data,
+      data: null,
+      isLoading: true,
+    });
     try {
       const response = await fetch(url, {
         method,

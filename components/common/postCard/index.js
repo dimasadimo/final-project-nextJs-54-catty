@@ -32,6 +32,7 @@ import Swal from "sweetalert2";
 import ModalEdit from '@/components/modalEdit';
 import { useState } from 'react';
 import ModalComment from '@/components/modalComment';
+import Link from 'next/link';
 
 const PostCard = ({ post, setShouldRefetch, shouldRefetch }) => {
 
@@ -41,6 +42,7 @@ const PostCard = ({ post, setShouldRefetch, shouldRefetch }) => {
   const [isOpenComment, setIsOpenComment] = useState(false);
   const token = Cookies.get('user_token');
   const localCreateDate = new Date(post?.created_at);
+  const localUpdateDate = new Date(post?.updated_at);
 
   const handleOpenModalComment = () => setIsOpenComment(!isOpenComment);
   const handleModalComment = () => {
@@ -113,9 +115,20 @@ const PostCard = ({ post, setShouldRefetch, shouldRefetch }) => {
             <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
               <Avatar name={post?.user?.name} src='' />
               <Box>
-                <Heading size='sm'>{post?.user?.name} {post?.is_own_post && '(You)'}</Heading>
+                <Heading size='sm'>
+                  <Link 
+                    href={post?.is_own_post ? '/profile' : `/profile/${post?.user?.id}`}
+                  >
+                  {post?.user?.name} {post?.is_own_post && '(You)'}
+                  </Link>
+                </Heading>
                 <Text fontSize='md'>{post?.user?.email}</Text>
-                <Text fontSize='sm'>{moment(localCreateDate).fromNow()}</Text>
+                <Text fontSize='sm'>
+                  {post?.created_at === post?.updated_at ? moment(localCreateDate).fromNow() : moment(localUpdateDate).fromNow()}
+                  {post?.created_at !== post?.updated_at &&
+                    <Text as='b' fontSize='xs' marginLeft="1" backgroundColor="#EDF2F7" p="1">EDITED</Text>
+                  }
+                </Text>
               </Box>
             </Flex>
             {post?.is_own_post &&

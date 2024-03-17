@@ -3,6 +3,7 @@ import {
   Box,
   Flex,
   Grid,
+  CircularProgress,
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import NotificationCard from "../common/notificationCard";
@@ -16,17 +17,18 @@ const Notifications = () => {
       Authorization: `Bearer ${token}`,
     }
   });
-  
-  if(isLoading) return <p>Loading</p>
 
   return (
     <Box marginBottom="4" marginTop="4">
-      <Flex>
-        <Grid gap={3}>
-        {notifications?.data?.map((item) => (
-          <NotificationCard key={item?.id} notification={item}/>
-        ))}
-        </Grid>
+      <Flex direction="column" alignItems="center">
+        {isLoading ? 
+          <CircularProgress isIndeterminate color='#329795' marginTop='25rem'/> :
+          <Grid gap={3}>
+            {notifications?.data?.map((item) => (
+              <NotificationCard key={item?.id} notification={item}/>
+            ))}
+          </Grid>
+        }
       </Flex>
     </Box>
   );

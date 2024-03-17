@@ -17,6 +17,9 @@ import {
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import Cookies from "js-cookie";
+import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
+import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 const Header = () => {
   
@@ -66,9 +69,9 @@ const Header = () => {
             </Avatar>
           </MenuButton>
           <MenuList>
-            <MenuItem onClick={() => router.push('/profile')}>My Profile</MenuItem>
-            <MenuItem onClick={() => router.push('/notifications')}>Notifications</MenuItem>
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            <MenuItem icon={<AccountBoxOutlinedIcon />} onClick={() => router.push('/profile')}>My Profile</MenuItem>
+            <MenuItem icon={<NotificationsActiveOutlinedIcon />} onClick={() => router.push('/notifications')}>Notifications</MenuItem>
+            <MenuItem icon={<LogoutOutlinedIcon />} onClick={handleLogout}>Logout</MenuItem>
           </MenuList>
         </Menu>)
       }

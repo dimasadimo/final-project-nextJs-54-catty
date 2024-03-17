@@ -60,7 +60,7 @@ const SignIn = () => {
   };
 
   return (
-    <Box h='calc(90vh)'>
+    <Box h='calc(88vh)'>
       <Flex alignItems='center' justifyContent='center' height='100%'>
         <Stack direction='column'>
           <Heading size='lg' fontSize='28px' mb='4'>Sign in to Catty</Heading>
