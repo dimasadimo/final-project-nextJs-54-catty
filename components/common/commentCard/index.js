@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {
   GridItem,
   Card,
@@ -36,9 +35,5 @@ const CommentCard = ({ comment }) => {
     </GridItem>
   );
 }
-
-CommentCard.propTypes = {
-  comment: PropTypes.object,
-};
 
 export default CommentCard;

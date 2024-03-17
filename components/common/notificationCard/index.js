@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {
   GridItem,
   Card,
@@ -37,9 +36,5 @@ const NotificationCard = ({ notification }) => {
     </GridItem>
   );
 }
-
-NotificationCard.propTypes = {
-  notification: PropTypes.object,
-};
 
 export default NotificationCard;

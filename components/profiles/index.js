@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useQueries } from "@/hooks/useQueries";
 import {
   Box,
@@ -183,9 +182,5 @@ const Profiles = ({ isDetail }) => {
     </Box>
   );
 }
-
-Profiles.propTypes = {
-  isDetail: PropTypes.bool,
-};
 
 export default Profiles;

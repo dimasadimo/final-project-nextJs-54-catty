@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {
   Button,
   useToast,
@@ -104,11 +103,5 @@ const ModalComment = ({ data, isOpen, onClose }) => {
     </Modal>
   );
 }
-
-ModalComment.propTypes = {
-  isOpen: PropTypes.bool,
-  onClose: PropTypes.func,
-  data: PropTypes.object,
-};
 
 export default ModalComment;

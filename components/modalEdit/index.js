@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {
   Button,
   useToast,
@@ -69,13 +68,5 @@ const ModalEdit = ({ data, isOpen, onClose, setShouldRefetch, shouldRefetch }) =
     </Modal>
   );
 }
-
-ModalEdit.propTypes = {
-  isOpen: PropTypes.bool,
-  onClose: PropTypes.func,
-  data: PropTypes.object,
-  setShouldRefetch: PropTypes.func,
-  shouldRefetch: PropTypes.bool,
-};
 
 export default ModalEdit;

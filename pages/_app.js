@@ -1,5 +1,4 @@
 import "@/styles/globals.css";
-import PropTypes from 'prop-types';
 import { ChakraProvider } from '@chakra-ui/react';
 import UserContextProvider from "@/context/userContext";
 
@@ -19,10 +18,4 @@ export default function App({ Component, pageProps, router }) {
       }
     </ChakraProvider>
   );
-}
-
-App.propTypes = {
-  Component: PropTypes.any,
-  pageProps: PropTypes.object,
-  router: PropTypes.object,
 };

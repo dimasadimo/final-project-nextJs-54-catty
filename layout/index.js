@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import PropTypes from 'prop-types';
 import { Container } from '@chakra-ui/react';
 import Header from '@/components/header';
 
@@ -24,10 +23,4 @@ export default function Layout({ children, metaTitle, metaDescription }) {
         </Container>
     </>
   );
-};
-
-Layout.propTypes = {
-  children: PropTypes.any,
-  metaTitle: PropTypes.string,
-  metaDescription: PropTypes.string,
 };

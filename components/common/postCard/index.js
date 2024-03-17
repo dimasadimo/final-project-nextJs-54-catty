@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {
   GridItem,
   Card,
@@ -204,11 +203,5 @@ const PostCard = ({ post, setShouldRefetch, shouldRefetch }) => {
     </GridItem>
   );
 }
-
-PostCard.propTypes = {
-  post: PropTypes.object,
-  setShouldRefetch: PropTypes.func,
-  shouldRefetch: PropTypes.bool,
-};
 
 export default PostCard;
