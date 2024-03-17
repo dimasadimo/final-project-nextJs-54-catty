@@ -12,6 +12,8 @@ import {
   Grid,
   Card,
   CardBody,
+  CircularProgress,
+  Text,
 } from "@chakra-ui/react";
 import { useMutation } from '@/hooks/useMutation';
 import { useState } from 'react';
@@ -22,7 +24,7 @@ import CommentCard from '../common/commentCard';
 const ModalComment = ({ data, isOpen, onClose }) => {
   
   const toast = useToast();
-  const { mutate } = useMutation();
+  const { mutate, isLoading: isLoadingPost } = useMutation();
   const [post, setPost] = useState({
     description: "",
   });
@@ -53,6 +55,9 @@ const ModalComment = ({ data, isOpen, onClose }) => {
       });
     } else {
       setShouldRefetch(!shouldRefetch);
+      setPost({
+        description: "",
+      })
     }
   };
 
@@ -82,21 +87,34 @@ const ModalComment = ({ data, isOpen, onClose }) => {
                   onClick={handleSubmit}
                   _hover={{ backgroundColor: "#59C9C6" }}
                   isDisabled={!post?.description}
+                  isLoading={isLoadingPost}
+                  loadingText='Posting'
+                  colorScheme='#59C9C6'
+                  variant='outline'
+                  
                 >Comment</Button>
               </CardBody>
             </Card>  
           </Flex>
-          <Flex marginTop='11rem'>
+          <Flex marginTop='11rem' direction="column" alignItems="center">
+          { isLoading ? <CircularProgress isIndeterminate color='#329795' /> :
             <Grid gap={5}>
-            {posts?.data?.map((item) => (
-              <CommentCard 
-                key={item?.id} 
-                comment={item} 
-                setShouldRefetch={setShouldRefetch} 
-                shouldRefetch={shouldRefetch}
-              />
-            ))}
+            {posts?.data?.length > 0 ? 
+              posts?.data?.map((item) => (
+                <CommentCard 
+                  key={item?.id} 
+                  comment={item} 
+                  setShouldRefetch={setShouldRefetch} 
+                  shouldRefetch={shouldRefetch}
+                />
+              )) 
+              : 
+              <Flex>
+                <Text >No comments</Text>
+              </Flex>
+            }
             </Grid>
+          }
           </Flex>
         </ModalBody>
       </ModalContent>

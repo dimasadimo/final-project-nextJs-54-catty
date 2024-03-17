@@ -19,12 +19,13 @@ import { useContext, useEffect, useState, useCallback } from "react";
 import { UserContext } from "@/context/userContext";
 import { useMutation } from "@/hooks/useMutation";
 import { useRouter } from 'next/router';
+import InboxOutlinedIcon from '@mui/icons-material/InboxOutlined';
 
 const Profiles = ({ isDetail }) => {
 
   const value = useContext(UserContext);
   const toast = useToast();
-  const { mutate } = useMutation();
+  const { mutate, isLoading: isLoadingPost } = useMutation();
   const [post, setPost] = useState({
     description: "",
   });
@@ -99,6 +100,10 @@ const Profiles = ({ isDetail }) => {
       });
     } else {
       setShouldRefetch(!shouldRefetch);
+      setPost({
+        ...post,
+        description: "",
+      });
     }
   };
 
@@ -162,25 +167,38 @@ const Profiles = ({ isDetail }) => {
                 onClick={handleSubmit}
                 _hover={{ backgroundColor: "#59C9C6" }}
                 isDisabled={!post?.description}
+                isLoading={isLoadingPost}
+                loadingText='Posting'
+                colorScheme='#59C9C6'
+                variant='outline'
               >Post</Button>
             </CardBody>
           </Card>
         </Flex>
       }
-      <Flex marginTop={!isDetail ? '25rem' : '13rem'}>
+      <Flex marginTop={!isDetail ? '25rem' : '13rem'} direction="column" alignItems="center">
+      { isLoading ? <CircularProgress isIndeterminate color='#329795' /> :
         <Grid gap={5}>
-        {posts?.data?.map((item) => (
-          <PostCard 
-            key={item?.id} 
-            post={item}
-            setShouldRefetch={setShouldRefetch} 
-            shouldRefetch={shouldRefetch}
-          />
-        ))}
+        {posts?.data?.length > 0 ? 
+          posts?.data?.map((item) => (
+            <PostCard 
+              key={item?.id} 
+              post={item}
+              setShouldRefetch={setShouldRefetch} 
+              shouldRefetch={shouldRefetch}
+            />
+          ))
+          :
+          <Flex>
+            <InboxOutlinedIcon />
+            <Text ml='2'>No posts</Text>
+          </Flex>
+        }
         </Grid>
+      }
       </Flex>
     </Box>
   );
-}
+};
 
 export default Profiles;
