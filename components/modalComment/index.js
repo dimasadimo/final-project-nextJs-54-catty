@@ -30,7 +30,7 @@ const ModalComment = ({ data, isOpen, onClose }) => {
   });
   const token = Cookies.get('user_token');
   const [shouldRefetch, setShouldRefetch] = useState(false);
-  const { data: posts, isLoading } = useQueries({ prefixUrl: `https://paace-f178cafcae7b.nevacloud.io/api/replies/post/${data?.id}`, 
+  const { data: posts, isLoading } = useQueries({ prefixUrl: `https://be.pace-unv.cloud/api/replies/post/${data?.id}`, 
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -38,7 +38,7 @@ const ModalComment = ({ data, isOpen, onClose }) => {
   });
 
   const handleSubmit = async () => {
-    const response = await mutate({ url: `https://paace-f178cafcae7b.nevacloud.io/api/replies/post/${data?.id}`, payload: {...post}, 
+    const response = await mutate({ url: `https://be.pace-unv.cloud/api/replies/post/${data?.id}`, payload: {...post}, 
       headers: {
         Authorization: `Bearer ${token}`,
       }

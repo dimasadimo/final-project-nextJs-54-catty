@@ -24,7 +24,7 @@ const Posts = () => {
   });
   const [shouldRefetch, setShouldRefetch] = useState(false);
   const token = Cookies.get('user_token');
-  const { data: posts, isLoading } = useQueries({ prefixUrl: "https://paace-f178cafcae7b.nevacloud.io/api/posts?type=all", 
+  const { data: posts, isLoading } = useQueries({ prefixUrl: "https://be.pace-unv.cloud/api/posts?type=all", 
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -33,7 +33,7 @@ const Posts = () => {
 
 
   const handleSubmit = async () => {
-    const response = await mutate({ url: 'https://paace-f178cafcae7b.nevacloud.io/api/post', payload: {...post}, 
+    const response = await mutate({ url: 'https://be.pace-unv.cloud/api/post', payload: {...post}, 
       headers: {
         Authorization: `Bearer ${token}`,
       }

@@ -36,7 +36,7 @@ const SignUp = () => {
   const handleClick = () => setShow(!show);
 
   const handleSubmit = async () => {
-    const response = await mutate({ url: 'https://paace-f178cafcae7b.nevacloud.io/api/register', payload});
+    const response = await mutate({ url: 'https://be.pace-unv.cloud/api/register', payload});
   
     if(!response?.success) { 
       toast({

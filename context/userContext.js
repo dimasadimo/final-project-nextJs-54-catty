@@ -6,7 +6,7 @@ export const UserContext = createContext({});
 
 const UserContextProvider = ({ children, ...props}) => { 
 
-  const { data: userData } = useQueries({ prefixUrl: 'https://paace-f178cafcae7b.nevacloud.io/api/user/me', 
+  const { data: userData } = useQueries({ prefixUrl: 'https://be.pace-unv.cloud/api/user/me', 
     headers: {
       Authorization: `Bearer ${Cookies.get('user_token')}`, 
     },

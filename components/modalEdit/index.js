@@ -23,7 +23,7 @@ const ModalEdit = ({ data, isOpen, onClose, setShouldRefetch, shouldRefetch }) =
   const token = Cookies.get('user_token');
 
   const handleSubmit = async () => {
-    const response = await mutate({ url: `https://paace-f178cafcae7b.nevacloud.io/api/post/update/${data?.id}`, payload: {...post}, 
+    const response = await mutate({ url: `https://be.pace-unv.cloud/api/post/update/${data?.id}`, payload: {...post}, 
       method: 'PATCH',
       headers: {
         Authorization: `Bearer ${token}`,

@@ -31,7 +31,7 @@ const Header = () => {
   
   const handleLogout = async () => {
     const response = await mutate({ 
-      url: 'https://paace-f178cafcae7b.nevacloud.io/api/logout', 
+      url: 'https://be.pace-unv.cloud/api/logout', 
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,

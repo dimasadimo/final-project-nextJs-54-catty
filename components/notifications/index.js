@@ -14,7 +14,7 @@ const Notifications = () => {
 
   const token = Cookies.get('user_token');
 
-  const { data: notifications, isLoading } = useQueries({ prefixUrl: "https://paace-f178cafcae7b.nevacloud.io/api/notifications", 
+  const { data: notifications, isLoading } = useQueries({ prefixUrl: "https://be.pace-unv.cloud/api/notifications", 
     headers: {
       Authorization: `Bearer ${token}`,
     }

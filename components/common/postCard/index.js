@@ -51,7 +51,7 @@ const PostCard = ({ post, setShouldRefetch, shouldRefetch }) => {
 
   const handleLikes = async () => {
 
-    const response = await mutate({ url: `https://paace-f178cafcae7b.nevacloud.io/api/${post?.is_like_post ? 'unlikes' : 'likes'}/post/${post?.id}`, 
+    const response = await mutate({ url: `https://be.pace-unv.cloud/api/${post?.is_like_post ? 'unlikes' : 'likes'}/post/${post?.id}`, 
       headers: {
         Authorization: `Bearer ${token}`,
       }
@@ -83,7 +83,7 @@ const PostCard = ({ post, setShouldRefetch, shouldRefetch }) => {
       width: '27rem',
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const response = await mutate({ url: `https://paace-f178cafcae7b.nevacloud.io/api/post/delete/${post?.id}`,
+        const response = await mutate({ url: `https://be.pace-unv.cloud/api/post/delete/${post?.id}`,
           method: 'DELETE',
           headers: {
             Authorization: `Bearer ${token}`,

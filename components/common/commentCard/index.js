@@ -36,7 +36,7 @@ const CommentCard = ({ comment, shouldRefetch, setShouldRefetch }) => {
       }
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const response = await mutate({ url: `https://paace-f178cafcae7b.nevacloud.io/api/replies/delete/${comment?.id}`,
+        const response = await mutate({ url: `https://be.pace-unv.cloud/api/replies/delete/${comment?.id}`,
           method: 'DELETE',
           headers: {
             Authorization: `Bearer ${token}`,
